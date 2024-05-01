@@ -1,17 +1,17 @@
 import styles from './Auth.module.css';
 import { auth } from '../../config/firebase.ts';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 export const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassowrd] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassowrd] = useState<string>('');
+  const [isAuthorised, setIsAuthorised] = useState<boolean>(false);
 
-  if (auth.currentUser?.email) {
-    console.log(auth.currentUser?.email);
-  } else {
-    console.log('You must first log in!');
-  }
+  useEffect(() => {
+    setIsAuthorised(true);
+  }, []);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -30,6 +30,13 @@ export const Auth = () => {
       setPassowrd('');
     }
   };
+
+  console.log(auth.currentUser?.email);
+
+  if (isAuthorised) {
+    return <Navigate to={'/'} />;
+  }
+
   return (
     <div className={styles.main_auth_box}>
       <div className={styles.auth_box}>
