@@ -1,10 +1,11 @@
-import './App.css';
+import styles from './App.module.css';
+import { Auth } from './components/Auth/Auth';
 
 function App() {
   return (
-    <>
-      <h1>Hi there</h1>
-    </>
+    <div className={styles.main}>
+      <Auth />
+    </div>
   );
 }
 

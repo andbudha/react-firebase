@@ -1,0 +1,43 @@
+.main_auth_box {
+  background: #f3f3f3;
+  min-height: 100vh;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.auth_box {
+  background: #fff;
+  height: 260px;
+  width: 360px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.login_input {
+  width: 240px;
+  height: 40px;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.login_btn {
+  width: 240px;
+  height: 40px;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
