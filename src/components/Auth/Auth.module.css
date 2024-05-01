@@ -1,7 +1,7 @@
 .main_auth_box {
   background: #f3f3f3;
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 1400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
   background: #fff;
   height: 260px;
   width: 360px;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,24 +20,36 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.login_input {
+.sign_input {
   width: 240px;
   height: 40px;
   padding: 5px;
   font-size: 1rem;
   letter-spacing: 1px;
   margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px #3c3c3c solid;
 }
 
-.login_btn {
+.sign_in_btn {
   width: 240px;
   height: 40px;
   padding: 5px;
   font-size: 1rem;
   letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px #3c3c3c solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+}
+.sign_in_btn:hover {
+  transition: 0.3s;
+  background: #fff;
+}
+
+.sign_in_btn:not(:hover) {
+  transition: 0.3s;
 }

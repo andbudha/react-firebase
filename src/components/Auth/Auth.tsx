@@ -7,7 +7,11 @@ export const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassowrd] = useState('');
 
-  console.log(auth.currentUser?.email);
+  if (auth.currentUser?.email) {
+    console.log(auth.currentUser?.email);
+  } else {
+    console.log('You must first log in!');
+  }
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -32,19 +36,19 @@ export const Auth = () => {
         <input
           value={email}
           placeholder="Email..."
-          className={styles.login_input}
+          className={styles.sign_input}
           onChange={emailSettingFunc}
         />
         <input
           type="password"
           value={password}
           placeholder="Password..."
-          className={styles.login_input}
+          className={styles.sign_input}
           onChange={passwordSettingFunc}
         />
         <div className={styles.btn_box}>
-          <button className={styles.login_btn} onClick={signIn}>
-            Login
+          <button className={styles.sign_in_btn} onClick={signIn}>
+            Sign In
           </button>
         </div>
       </div>
