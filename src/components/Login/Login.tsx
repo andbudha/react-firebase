@@ -1,10 +1,13 @@
 import styles from './Login.module.css';
 import { ChangeEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassowrd] = useState<string>('');
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -20,11 +23,13 @@ export const Login = () => {
       } else if (password === '') {
         alert('Enter your password, please!');
       } else {
-        const logInObject = {
+        const loggedIn = await signInWithEmailAndPassword(
+          auth,
           email,
-          password,
-        };
-        console.log(logInObject);
+          password
+        );
+        if (loggedIn) setLoggedIn(true);
+        alert('Successfully logged in!');
       }
     } catch (error) {
       console.log(error);
@@ -34,6 +39,9 @@ export const Login = () => {
     }
   };
 
+  if (loggedIn) {
+    return <Navigate to={'/'} />;
+  }
   return (
     <div className={styles.main_login_box}>
       <div className={styles.login_box}>
