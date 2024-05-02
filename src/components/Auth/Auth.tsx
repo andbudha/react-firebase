@@ -1,7 +1,7 @@
 import styles from './Auth.module.css';
 import { auth, googleProvider } from '../../config/firebase.ts';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
 
 export const Auth = () => {
@@ -9,9 +9,7 @@ export const Auth = () => {
   const [password, setPassowrd] = useState<string>('');
   const [isAuthorised, setIsAuthorised] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsAuthorised(true);
-  }, []);
+  console.log('state updated: ', isAuthorised);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -22,7 +20,19 @@ export const Auth = () => {
   };
   const signIn = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      if (email === '') {
+        alert('Enter your email, please!');
+      } else if (password === '') {
+        alert('Enter your password, please!');
+      } else {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        if (user) alert('Account created successfully!');
+        setIsAuthorised(true);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -39,7 +49,7 @@ export const Auth = () => {
     }
   };
 
-  if (!isAuthorised) {
+  if (isAuthorised) {
     return <Navigate to={'/login'} />;
   }
 
