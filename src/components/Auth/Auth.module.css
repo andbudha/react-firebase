@@ -56,3 +56,7 @@
 .sign_in_btn:not(:hover) {
   transition: 0.3s;
 }
+
+.info_box {
+  margin: 10px;
+}

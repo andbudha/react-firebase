@@ -2,16 +2,16 @@ import styles from './Auth.module.css';
 import { auth, googleProvider } from '../../config/firebase.ts';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 export const Auth = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassowrd] = useState<string>('');
   const [isAuthorised, setIsAuthorised] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsAuthorised(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsAuthorised(true);
+  // }, []);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -39,9 +39,9 @@ export const Auth = () => {
     }
   };
 
-  if (!isAuthorised) {
-    return <Navigate to={'/'} />;
-  }
+  // if (!isAuthorised) {
+  //   return <Navigate to={'/'} />;
+  // }
 
   return (
     <div className={styles.main_auth_box}>
@@ -68,6 +68,16 @@ export const Auth = () => {
           <button className={styles.sign_in_btn} onClick={signInWithGoogle}>
             Sign In With Google
           </button>
+        </div>
+        <div className={styles.info_box}>
+          <h4>
+            Have an account?
+            <span>
+              <NavLink to={'/login'} className={styles.register_link}>
+                LogIn
+              </NavLink>{' '}
+            </span>
+          </h4>
         </div>
       </div>
     </div>
