@@ -1,21 +1,29 @@
 import { signOut } from 'firebase/auth';
 import styles from './Home.module.css';
 import { auth } from '../../config/firebase';
-import { useEffect } from 'react';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 export const Home = () => {
-  useEffect(() => {
-    console.log(auth.currentUser?.email);
-  });
+  const [loggedOut, setLoggedOut] = useState<boolean>(false);
+  // useEffect(() => {
+  //   console.log(auth.currentUser?.email);
+  // });
 
   const logOut = async () => {
     try {
       await signOut(auth);
-      console.log(auth?.currentUser?.email);
+      setLoggedOut(true);
+      console.log(auth.currentUser?.email);
+      alert('You have successfully logged out!');
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (loggedOut) {
+    return <Navigate to={'/login'} />;
+  }
 
   return (
     <div className={styles.main_home_page}>
