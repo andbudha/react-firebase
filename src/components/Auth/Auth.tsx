@@ -9,9 +9,9 @@ export const Auth = () => {
   const [password, setPassowrd] = useState<string>('');
   const [isAuthorised, setIsAuthorised] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   setIsAuthorised(true);
-  // }, []);
+  useEffect(() => {
+    setIsAuthorised(true);
+  }, []);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -39,9 +39,9 @@ export const Auth = () => {
     }
   };
 
-  // if (!isAuthorised) {
-  //   return <Navigate to={'/'} />;
-  // }
+  if (!isAuthorised) {
+    return <Navigate to={'/login'} />;
+  }
 
   return (
     <div className={styles.main_auth_box}>
@@ -73,7 +73,7 @@ export const Auth = () => {
           <h4>
             Have an account?
             <span>
-              <NavLink to={'/login'} className={styles.register_link}>
+              <NavLink to={'/login'} className={styles.login_link}>
                 LogIn
               </NavLink>{' '}
             </span>
