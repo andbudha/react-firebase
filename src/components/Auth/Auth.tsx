@@ -1,6 +1,6 @@
 import styles from './Auth.module.css';
-import { auth } from '../../config/firebase.ts';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, googleProvider } from '../../config/firebase.ts';
+import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -31,9 +31,15 @@ export const Auth = () => {
     }
   };
 
-  console.log(auth.currentUser?.email);
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  if (isAuthorised) {
+  if (!isAuthorised) {
     return <Navigate to={'/'} />;
   }
 
@@ -56,6 +62,11 @@ export const Auth = () => {
         <div className={styles.btn_box}>
           <button className={styles.sign_in_btn} onClick={signIn}>
             Sign In
+          </button>
+        </div>
+        <div className={styles.btn_box}>
+          <button className={styles.sign_in_btn} onClick={signInWithGoogle}>
+            Sign In With Google
           </button>
         </div>
       </div>
