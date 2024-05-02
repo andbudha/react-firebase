@@ -6,3 +6,33 @@
   padding: 20px;
   margin: 0 auto;
 }
+
+.logout_btn_box {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logout_btn {
+  width: 120px;
+  height: 30px;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px #3c3c3c solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logout_btn:hover {
+  transition: 0.3s;
+  background: #fff;
+}
+
+.logout_btn:not(:hover) {
+  transition: 0.3s;
+}

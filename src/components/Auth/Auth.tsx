@@ -59,7 +59,7 @@ export const Auth = () => {
           className={styles.sign_input}
           onChange={passwordSettingFunc}
         />
-        <div className={styles.btn_box}>
+        <div className={styles.sign_in_btn_box}>
           <button className={styles.sign_in_btn} onClick={signIn}>
             Sign In
           </button>
