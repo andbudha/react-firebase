@@ -3,6 +3,8 @@ import { auth, googleProvider } from '../../config/firebase.ts';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { ChangeEvent, useState } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
+import { FirebaseError } from 'firebase/app';
+import { generateErrorMessage } from '../../auth/ErrorHandler/errorhandler.ts';
 
 export const Auth = () => {
   const [email, setEmail] = useState<string>('');
@@ -30,12 +32,16 @@ export const Auth = () => {
         );
         if (user) alert('Account created successfully!');
         setIsAuthorised(true);
+        setEmail('');
+        setPassowrd('');
       }
     } catch (error) {
-      console.log(error);
-    } finally {
-      setEmail('');
-      setPassowrd('');
+      if (error instanceof FirebaseError) {
+        generateErrorMessage(error);
+        console.log(error);
+      } else {
+        console.log(error);
+      }
     }
   };
 
