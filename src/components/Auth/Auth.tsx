@@ -63,23 +63,23 @@ export const Auth = () => {
         <input
           value={email}
           placeholder="Email..."
-          className={styles.sign_input}
+          className={styles.register_input}
           onChange={emailSettingFunc}
         />
         <input
           type="password"
           value={password}
           placeholder="Password..."
-          className={styles.sign_input}
+          className={styles.register_input}
           onChange={passwordSettingFunc}
         />
-        <div className={styles.sign_in_btn_box}>
-          <button className={styles.sign_in_btn} onClick={signIn}>
-            Sign In
+        <div className={styles.register_btn_box}>
+          <button className={styles.register_btn} onClick={signIn}>
+            Register
           </button>
         </div>
-        <div className={styles.btn_box}>
-          <button className={styles.sign_in_btn} onClick={signInWithGoogle}>
+        <div className={styles.register_btn}>
+          <button className={styles.register_btn} onClick={signInWithGoogle}>
             Sign In With Google
           </button>
         </div>
