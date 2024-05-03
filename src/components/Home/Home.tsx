@@ -6,9 +6,6 @@ import { Navigate } from 'react-router-dom';
 
 export const Home = () => {
   const [loggedOut, setLoggedOut] = useState<boolean>(false);
-  // useEffect(() => {
-  //   console.log(auth.currentUser?.email);
-  // });
 
   const logOut = async () => {
     try {

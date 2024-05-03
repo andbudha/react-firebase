@@ -9,8 +9,6 @@ export const Auth = () => {
   const [password, setPassowrd] = useState<string>('');
   const [isAuthorised, setIsAuthorised] = useState<boolean>(false);
 
-  console.log('state updated: ', isAuthorised);
-
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
   };

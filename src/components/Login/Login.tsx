@@ -3,6 +3,8 @@ import { ChangeEvent, useState } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import { generateErrorMessage } from '../../auth/ErrorHandler/errorhandler';
+import { FirebaseError } from 'firebase/app';
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('');
@@ -30,12 +32,16 @@ export const Login = () => {
         );
         if (loggedIn) setLoggedIn(true);
         alert('Successfully logged in!');
+        setEmail('');
+        setPassowrd('');
       }
     } catch (error) {
-      console.log(error);
-    } finally {
-      setEmail('');
-      setPassowrd('');
+      if (error instanceof FirebaseError) {
+        generateErrorMessage(error);
+        console.log(error);
+      } else {
+        console.log(error);
+      }
     }
   };
 
