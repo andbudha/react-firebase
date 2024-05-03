@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Movies } from '../../assets/types';
 import { collection, getDocs } from 'firebase/firestore';
+import { MovieCard } from '../MovieCard/MovieCard';
 
 export const Home = () => {
   const [loggedOut, setLoggedOut] = useState<boolean>(false);
@@ -49,7 +50,13 @@ export const Home = () => {
           Log Out
         </button>
       </div>
-      <h1>Home page</h1>
+      {movies?.map((movie) => {
+        return (
+          <div key={movie.id}>
+            <MovieCard movie={movie} />
+          </div>
+        );
+      })}
     </div>
   );
 };

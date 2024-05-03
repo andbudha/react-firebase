@@ -1,4 +1,4 @@
-type Movie = {
+export type Movie = {
   oscar: boolean;
   title: string;
   releaseYear: number;
