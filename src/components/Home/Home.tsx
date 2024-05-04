@@ -27,6 +27,8 @@ export const Home = () => {
   const getData = async () => {
     try {
       const response = await getDocs(movieCollection);
+      console.log(response);
+
       const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       if (data) {
         setMovies(data);
