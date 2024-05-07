@@ -1,34 +1,20 @@
-import { signOut } from 'firebase/auth';
 import styles from './Home.module.css';
-import { auth, dataBase } from '../../config/firebase';
+import { dataBase } from '../../config/firebase';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { Movies } from '../../assets/types';
 import { collection, getDocs } from 'firebase/firestore';
-import { MovieCard } from '../MovieCard/MovieCard';
+import Navbar from '../Navbar/Navbar';
+import { GridCard } from '../GridCard/GridCard';
+import { MovieForm } from '../MovieForm/MovieForm';
 
 export const Home = () => {
-  const [loggedOut, setLoggedOut] = useState<boolean>(false);
-  const [movies, setMovies] = useState<null | Movies>();
+  const [movies, setMovies] = useState<null | Movies>(null);
   console.log(movies);
 
   const movieCollection = collection(dataBase, 'movies');
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-      setLoggedOut(true);
-      console.log(auth.currentUser?.email);
-      alert('You have successfully logged out!');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const getData = async () => {
     try {
       const response = await getDocs(movieCollection);
-      console.log(response);
-
       const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       if (data) {
         setMovies(data);
@@ -41,24 +27,11 @@ export const Home = () => {
     getData();
   }, []);
 
-  if (loggedOut) {
-    return <Navigate to={'/login'} />;
-  }
-
   return (
     <div className={styles.main_home_page}>
-      <div className={styles.logout_btn_box}>
-        <button className={styles.logout_btn} onClick={logOut}>
-          Log Out
-        </button>
-      </div>
-      {movies?.map((movie) => {
-        return (
-          <div key={movie.id}>
-            <MovieCard movie={movie} />
-          </div>
-        );
-      })}
+      <Navbar />
+      <MovieForm />
+      <GridCard movies={movies} />
     </div>
   );
 };

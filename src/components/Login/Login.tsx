@@ -38,7 +38,6 @@ export const Login = () => {
     } catch (error) {
       if (error instanceof FirebaseError) {
         generateErrorMessage(error);
-        console.log(error);
       } else {
         console.log(error);
       }

@@ -1,0 +1,37 @@
+.navbar_main_box {
+  height: 80px;
+  width: 100%;
+  background: #d8d9da;
+  padding: 10px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo_box {
+  height: 50px;
+  width: 100px;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout_btn_box {
+  height: 40px;
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout_btn {
+  height: 30px;
+  width: 90px;
+  font-size: 1rem;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
