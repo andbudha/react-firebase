@@ -1,11 +1,43 @@
+import { ChangeEvent, useState } from 'react';
 import styles from './Movieform.module.css';
 export const MovieForm = () => {
+  const [inputTitle, setInputTitle] = useState<string>('');
+  const [inputReleaseYear, setInputReleaseYear] = useState<string>('');
+  const [answer, setAnswer] = useState<boolean>();
+
+  console.log(answer);
+
+  const getTitleInputValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputTitle(e.currentTarget.value);
+  };
+
+  const getReleaseYearInputValueHandler = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReleaseYear(e.currentTarget.value);
+  };
+
+  const addNewMovieHandler = () => {
+    const newMovie = {
+      oscar: answer,
+      releaseYear: Number(inputReleaseYear),
+      title: inputTitle,
+    };
+    console.log(newMovie);
+  };
   return (
     <div className={styles.movie_form_main_box}>
-      <input className={styles.movie_title_input} placeholder="Title..." />
       <input
+        value={inputTitle}
+        className={styles.movie_title_input}
+        placeholder="Title..."
+        onChange={getTitleInputValueHandler}
+      />
+      <input
+        value={inputReleaseYear}
         className={styles.movie_release_year_input}
         placeholder="Release year..."
+        onChange={getReleaseYearInputValueHandler}
       />
       <div className={styles.radio_btn_box}>
         <h4>Received Oscar: </h4>
@@ -18,6 +50,8 @@ export const MovieForm = () => {
               name="oscar"
               id="yes"
               value="yes"
+              checked={answer === true}
+              onChange={() => setAnswer(true)}
             />
             <label htmlFor="yes">Yes</label>
           </div>
@@ -28,12 +62,16 @@ export const MovieForm = () => {
               name="oscar"
               id="no"
               value="no"
+              checked={answer === false}
+              onChange={() => setAnswer(false)}
             />
             <label htmlFor="no">No</label>
           </div>
         </div>
       </div>
-      <button className={styles.add_movie_btn}>Add Movie</button>
+      <button className={styles.add_movie_btn} onClick={addNewMovieHandler}>
+        Add Movie
+      </button>
     </div>
   );
 };
