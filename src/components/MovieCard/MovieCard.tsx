@@ -9,12 +9,25 @@ export const MovieCard = (props: MovieCrad) => {
   return (
     <div className={styles.card_box}>
       <div className={styles.card_info_box}>
-        <h2>Title: {props.movie.title}</h2>
-        <h2>Release-year: {props.movie.releaseYear}</h2>
-        <h2>
+        <h3 className={styles.header}>
+          Title:{' '}
+          <span className={styles.detailed_text}>{props.movie.title}</span>
+        </h3>
+        <h3 className={styles.header}>
+          Release-year:{' '}
+          <span className={styles.detailed_text}>
+            {props.movie.releaseYear}
+          </span>
+        </h3>
+        <h3 className={styles.header}>
           Received Oscar:{' '}
-          {props.movie.oscar ? <span>Yes</span> : <span>No</span>}
-        </h2>
+          <span className={styles.detailed_text}>
+            {props.movie.oscar ? <span>Yes</span> : <span>No</span>}
+          </span>
+        </h3>
+      </div>
+      <div className={styles.btn_box}>
+        <button className={styles.remove_btn}>delete</button>
       </div>
     </div>
   );

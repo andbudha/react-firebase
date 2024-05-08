@@ -6,18 +6,43 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .card_info_box {
-  background: #fcfcfc;
   padding: 10px;
-  height: 160px;
-  width: 280px;
+  height: 120px;
+  width: 240px;
   letter-spacing: 1px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: start;
+}
+.header {
+  color: #4f4557;
+}
+.detailed_text {
+  font-size: 1rem;
+  color: #6d5d6e;
+}
+
+.btn_box {
+  height: 50px;
+  width: 240px;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.remove_btn {
+  height: 30px;
+  width: 90px;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  border: 2px solid #4f4557;
+  cursor: pointer;
 }
