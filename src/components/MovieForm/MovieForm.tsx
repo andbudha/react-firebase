@@ -1,12 +1,22 @@
 import { ChangeEvent, useState } from 'react';
 import styles from './Movieform.module.css';
-export const MovieForm = () => {
+import { addDoc, collection } from 'firebase/firestore';
+import { dataBase } from '../../config/firebase';
+
+type MovieFormProps = {
+  getData: () => void;
+};
+export const MovieForm = ({ getData }: MovieFormProps) => {
   const [inputTitle, setInputTitle] = useState<string>('');
   const [inputReleaseYear, setInputReleaseYear] = useState<string>('');
-  const [answer, setAnswer] = useState<boolean>();
+  const [answer, setAnswer] = useState<boolean>(false);
+  const movieCollection = collection(dataBase, 'movies');
 
-  console.log(answer);
-
+  const newMovie = {
+    oscar: answer,
+    releaseYear: Number(inputReleaseYear),
+    title: inputTitle,
+  };
   const getTitleInputValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputTitle(e.currentTarget.value);
   };
@@ -17,13 +27,24 @@ export const MovieForm = () => {
     setInputReleaseYear(e.currentTarget.value);
   };
 
-  const addNewMovieHandler = () => {
-    const newMovie = {
-      oscar: answer,
-      releaseYear: Number(inputReleaseYear),
-      title: inputTitle,
-    };
-    console.log(newMovie);
+  const addNewMovieHandler = async () => {
+    if (inputTitle && inputReleaseYear) {
+      try {
+        const response = await addDoc(movieCollection, newMovie);
+        if (response) {
+          getData();
+          alert('Movie added successfully');
+          setInputTitle('');
+          setInputReleaseYear('');
+          setAnswer(false);
+          console.log(newMovie);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert('Fill in all the fields, please!');
+    }
   };
   return (
     <div className={styles.movie_form_main_box}>

@@ -30,7 +30,7 @@ export const Home = () => {
   return (
     <div className={styles.main_home_page}>
       <Navbar />
-      <MovieForm />
+      <MovieForm getData={getData} />
       <GridCard movies={movies} />
     </div>
   );
