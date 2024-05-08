@@ -31,7 +31,7 @@ export const Home = () => {
     <div className={styles.main_home_page}>
       <Navbar />
       <MovieForm getData={getData} />
-      <GridCard movies={movies} />
+      <GridCard movies={movies} getData={getData} />
     </div>
   );
 };

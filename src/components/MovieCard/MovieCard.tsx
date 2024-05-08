@@ -1,11 +1,24 @@
 import styles from './MovieCard.module.css';
 import { Movie } from '../../assets/types';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { dataBase } from '../../config/firebase';
 
 type MovieCrad = {
   movie: Movie;
+  getData: () => void;
 };
 
 export const MovieCard = (props: MovieCrad) => {
+  const deleteMovieHandler = async (movieID: string) => {
+    const docToRemove = doc(dataBase, 'movies', movieID);
+    try {
+      await deleteDoc(docToRemove);
+      props.getData();
+      alert('Movie successfully removed!');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className={styles.card_box}>
       <div className={styles.card_info_box}>
@@ -27,7 +40,12 @@ export const MovieCard = (props: MovieCrad) => {
         </h3>
       </div>
       <div className={styles.btn_box}>
-        <button className={styles.remove_btn}>delete</button>
+        <button
+          className={styles.remove_btn}
+          onClick={() => deleteMovieHandler(props.movie.id)}
+        >
+          delete
+        </button>
       </div>
     </div>
   );
