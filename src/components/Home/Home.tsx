@@ -1,14 +1,17 @@
 import styles from './Home.module.css';
 import { dataBase } from '../../config/firebase';
 import { useEffect, useState } from 'react';
-import { Movies } from '../../assets/types';
+import { Movie, Movies } from '../../assets/types';
 import { collection, getDocs } from 'firebase/firestore';
 import Navbar from '../Navbar/Navbar';
 import { GridCard } from '../GridCard/GridCard';
 import { MovieForm } from '../MovieForm/MovieForm';
+import { UpdateMovieForm } from '../UpdateMovieForm/UpdateMovieForm';
 
 export const Home = () => {
   const [movies, setMovies] = useState<null | Movies>(null);
+  const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
+  const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
   console.log(movies);
 
   const movieCollection = collection(dataBase, 'movies');
@@ -29,9 +32,20 @@ export const Home = () => {
 
   return (
     <div className={styles.main_home_page}>
+      {!!activeUpdateMovieForm && (
+        <UpdateMovieForm
+          setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+          movieToUpdate={movieToUpdate}
+        />
+      )}
       <Navbar />
       <MovieForm getData={getData} />
-      <GridCard movies={movies} getData={getData} />
+      <GridCard
+        movies={movies}
+        getData={getData}
+        setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+        setMovieToUpdate={setMovieToUpdate}
+      />
     </div>
   );
 };
