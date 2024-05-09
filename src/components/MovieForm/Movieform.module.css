@@ -1,5 +1,32 @@
 .movie_form_main_box {
-  height: 240px;
+  max-height: 360px;
+  width: 300px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle_movie_form_btn {
+  cursor: pointer;
+  height: 50px;
+  width: 240px;
+  margin: 20px 0;
+  font-size: 1rem;
+  border: 1px solid #c3c3c3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.chevron_down,
+.chevron_up {
+  height: 20px;
+  width: 20px;
+}
+.movie_form_box {
+  height: 260px;
   width: 300px;
   margin: 10px auto;
   background: #cfcfcf;
