@@ -2,7 +2,7 @@
   border: 1px solid;
   border-radius: 10px;
   margin: 20px;
-  height: 300px;
+  height: 200px;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,8 @@
   align-items: center;
 }
 
-.remove_btn {
+.remove_btn,
+.update_movie_btn {
   height: 30px;
   width: 90px;
   letter-spacing: 1px;

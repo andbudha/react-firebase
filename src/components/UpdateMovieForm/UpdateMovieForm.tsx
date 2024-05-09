@@ -1,11 +1,16 @@
+import { Movie } from '../../assets/types';
 import styles from './UpdateMovieForm.module.css';
 
 type UpdateMovieFormProps = {
   setActiveUpdateMovieForm: (newState: boolean) => void;
+  movieToUpdate: Movie | null;
 };
 export const UpdateMovieForm = ({
   setActiveUpdateMovieForm,
+  movieToUpdate,
 }: UpdateMovieFormProps) => {
+  console.log(movieToUpdate);
+
   const updateMovieHandler = () => {
     setActiveUpdateMovieForm(false);
   };

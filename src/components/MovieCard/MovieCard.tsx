@@ -6,6 +6,8 @@ import { dataBase } from '../../config/firebase';
 type MovieCrad = {
   movie: Movie;
   getData: () => void;
+  setActiveUpdateMovieForm: (newState: boolean) => void;
+  setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 
 export const MovieCard = (props: MovieCrad) => {
@@ -18,6 +20,11 @@ export const MovieCard = (props: MovieCrad) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const updateMovieHandler = (movieToUpdate: Movie) => {
+    props.setActiveUpdateMovieForm(true);
+    props.setMovieToUpdate(movieToUpdate);
   };
   return (
     <div className={styles.card_box}>
@@ -45,6 +52,12 @@ export const MovieCard = (props: MovieCrad) => {
           onClick={() => deleteMovieHandler(props.movie.id)}
         >
           delete
+        </button>
+        <button
+          className={styles.update_movie_btn}
+          onClick={() => updateMovieHandler(props.movie)}
+        >
+          update
         </button>
       </div>
     </div>
