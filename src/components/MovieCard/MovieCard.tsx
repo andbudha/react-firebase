@@ -3,14 +3,14 @@ import { Movie } from '../../assets/types';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { dataBase } from '../../config/firebase';
 
-type MovieCrad = {
+type MovieCradProps = {
   movie: Movie;
   getData: () => void;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 
-export const MovieCard = (props: MovieCrad) => {
+export const MovieCard = (props: MovieCradProps) => {
   const deleteMovieHandler = async (movieID: string) => {
     const docToRemove = doc(dataBase, 'movies', movieID);
     try {

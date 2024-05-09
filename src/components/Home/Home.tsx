@@ -36,6 +36,7 @@ export const Home = () => {
         <UpdateMovieForm
           setActiveUpdateMovieForm={setActiveUpdateMovieForm}
           movieToUpdate={movieToUpdate}
+          getData={getData}
         />
       )}
       <Navbar />
