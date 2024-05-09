@@ -11,8 +11,21 @@
   align-items: center;
 }
 
+.close_form_btn_box {
+  height: 40px;
+  width: 260px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.close_btn {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
 .update_movie_form_box {
-  height: 300px;
+  min-height: 300px;
   width: 300px;
   background: #fff;
   display: flex;

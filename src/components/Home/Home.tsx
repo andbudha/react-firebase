@@ -12,7 +12,6 @@ export const Home = () => {
   const [movies, setMovies] = useState<null | Movies>(null);
   const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
   const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
-  console.log(movies);
 
   const movieCollection = collection(dataBase, 'movies');
   const getData = async () => {

@@ -3,6 +3,7 @@ import { Movie } from '../../assets/types';
 import styles from './UpdateMovieForm.module.css';
 import { doc, updateDoc } from 'firebase/firestore';
 import { dataBase } from '../../config/firebase';
+import { IoClose } from 'react-icons/io5';
 
 type UpdateMovieFormProps = {
   setActiveUpdateMovieForm: (newState: boolean) => void;
@@ -27,13 +28,15 @@ export const UpdateMovieForm = ({
     movieID = movieToUpdate.id;
   }
 
+  const closeUpdateMovieFormHandler = () => {
+    setActiveUpdateMovieForm(false);
+  };
   const updatedMovie = {
     title: updatedTitle,
     releaseYear: Number(updatedReleaseYear),
     oscar: updatedAnswer,
   };
 
-  console.log(updatedAnswer);
   const updateTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUpdatedTitle(e.currentTarget.value);
   };
@@ -59,6 +62,12 @@ export const UpdateMovieForm = ({
   return (
     <div className={styles.update_form_main_box}>
       <div className={styles.update_movie_form_box}>
+        <div className={styles.close_form_btn_box}>
+          <IoClose
+            className={styles.close_btn}
+            onClick={closeUpdateMovieFormHandler}
+          />
+        </div>
         <input
           value={updatedTitle}
           className={styles.movie_title_input}

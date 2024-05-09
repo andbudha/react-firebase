@@ -1,5 +1,5 @@
 .card_box {
-  border: 1px solid;
+  border: 1px solid #c3c3c3;
   border-radius: 10px;
   margin: 20px;
   height: 200px;
@@ -44,6 +44,6 @@
   width: 90px;
   letter-spacing: 1px;
   font-size: 1rem;
-  border: 2px solid #4f4557;
+  border: 1px solid #c3c3c3;
   cursor: pointer;
 }
