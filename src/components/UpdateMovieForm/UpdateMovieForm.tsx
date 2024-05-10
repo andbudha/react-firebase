@@ -9,10 +9,12 @@ type UpdateMovieFormProps = {
   setActiveUpdateMovieForm: (newState: boolean) => void;
   movieToUpdate: Movie | null;
   getData: () => void;
+  setIsLoading: (newLoadingStatus: boolean) => void;
 };
 export const UpdateMovieForm = ({
   setActiveUpdateMovieForm,
   movieToUpdate,
+  setIsLoading,
   getData,
 }: UpdateMovieFormProps) => {
   const [updatedTitle, setUpdatedTitle] = useState(movieToUpdate?.title);
@@ -49,14 +51,17 @@ export const UpdateMovieForm = ({
     setUpdatedAnswer(newOscarStatus);
   };
   const updateMovieHandler = async () => {
+    setIsLoading(true);
     const docToUpdate = doc(dataBase, 'movies', movieID);
     try {
       await updateDoc(docToUpdate, updatedMovie);
-      alert('Movie successfully updated!');
+      setIsLoading(false);
       getData();
       setActiveUpdateMovieForm(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
