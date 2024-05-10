@@ -22,6 +22,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+}
+.logo {
+  text-decoration: none;
+  color: #151515;
 }
 
 .btn_box {

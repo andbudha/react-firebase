@@ -25,7 +25,10 @@ export default function Navbar() {
   return (
     <div className={styles.navbar_main_box}>
       <div className={styles.logo_box}>
-        <h2 className={styles.logo}>Firebase</h2>
+        <NavLink to={'/'} className={styles.logo}>
+          {' '}
+          <h2>Firebase</h2>
+        </NavLink>
       </div>
       <div className={styles.btn_box}>
         <NavLink className={styles.my_movies_btn} to={'mymovies'}>
