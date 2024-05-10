@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Login } from './components/Login/Login';
 import { MyMovies } from './components/MyMovies/MyMovies';
 import { Layout } from './components/Layout/Layout';
-import { Movies } from './assets/types';
+import { Movie, Movies } from './assets/types';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { auth, dataBase } from './config/firebase';
@@ -13,6 +13,8 @@ import { auth, dataBase } from './config/firebase';
 function App() {
   const [movies, setMovies] = useState<null | Movies>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
+  const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
   const [currentUserID, setCurrentUserID] = useState<undefined | string>(
     undefined
   );
@@ -51,10 +53,25 @@ function App() {
                 currentUserID={currentUserID}
                 getData={getData}
                 setIsLoading={setIsLoading}
+                activeUpdateMovieForm={activeUpdateMovieForm}
+                setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+                movieToUpdate={movieToUpdate}
+                setMovieToUpdate={setMovieToUpdate}
               />
             }
           />
-          <Route path="mymovies" element={<MyMovies />} />
+          <Route
+            path="mymovies"
+            element={
+              <MyMovies
+                movies={movies}
+                currentUserID={currentUserID}
+                getData={getData}
+                setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+                setMovieToUpdate={setMovieToUpdate}
+              />
+            }
+          />
         </Route>
         <Route path="register" element={<Auth />} />
         <Route path="login" element={<Login />} />

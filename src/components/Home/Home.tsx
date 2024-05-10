@@ -1,5 +1,4 @@
 import styles from './Home.module.css';
-import { useState } from 'react';
 import { Movie, Movies } from '../../assets/types';
 import { GridCard } from '../GridCard/GridCard';
 import { MovieForm } from '../MovieForm/MovieForm';
@@ -11,8 +10,12 @@ type HomeProps = {
   movies: Movies | null;
   isLoading: boolean;
   currentUserID: undefined | string;
+  activeUpdateMovieForm: boolean;
   getData: () => void;
   setIsLoading: (newLoadingStatus: boolean) => void;
+  setActiveUpdateMovieForm: (newState: boolean) => void;
+  movieToUpdate: Movie | null;
+  setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 export const Home = ({
   movies,
@@ -20,10 +23,11 @@ export const Home = ({
   currentUserID,
   getData,
   setIsLoading,
+  activeUpdateMovieForm,
+  setActiveUpdateMovieForm,
+  movieToUpdate,
+  setMovieToUpdate,
 }: HomeProps) => {
-  const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
-  const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
-
   return (
     <div className={styles.main_home_page}>
       {isLoading ? <ProgressBar /> : <FakeProgressBar />}
