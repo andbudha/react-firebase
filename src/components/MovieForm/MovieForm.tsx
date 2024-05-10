@@ -6,8 +6,16 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 
 type MovieFormProps = {
   getData: () => void;
+  setIsLoading: (newLoadingStatus: boolean) => void;
+  currentUserID: undefined | string;
 };
-export const MovieForm = ({ getData }: MovieFormProps) => {
+export const MovieForm = ({
+  getData,
+  setIsLoading,
+  currentUserID,
+}: MovieFormProps) => {
+  console.log(currentUserID);
+
   const [inputTitle, setInputTitle] = useState<string>('');
   const [inputReleaseYear, setInputReleaseYear] = useState<string>('');
   const [answer, setAnswer] = useState<boolean>(false);
@@ -18,6 +26,7 @@ export const MovieForm = ({ getData }: MovieFormProps) => {
     setToggleMovieBtn(!toggleMovieBtn);
   };
   const newMovie = {
+    userID: currentUserID,
     oscar: answer,
     releaseYear: Number(inputReleaseYear),
     title: inputTitle,
@@ -33,20 +42,22 @@ export const MovieForm = ({ getData }: MovieFormProps) => {
   };
 
   const addNewMovieHandler = async () => {
+    setIsLoading(true);
     if (inputTitle && inputReleaseYear) {
       try {
         const response = await addDoc(movieCollection, newMovie);
         if (response) {
           setToggleMovieBtn(!toggleMovieBtn);
           getData();
-          alert('Movie added successfully');
           setInputTitle('');
           setInputReleaseYear('');
           setAnswer(false);
-          console.log(newMovie);
+          setIsLoading(false);
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     } else {
       alert('Fill in all the fields, please!');

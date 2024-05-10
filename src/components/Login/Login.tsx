@@ -30,6 +30,7 @@ export const Login = () => {
           email,
           password
         );
+
         if (loggedIn) setLoggedIn(true);
         alert('Successfully logged in!');
         setEmail('');

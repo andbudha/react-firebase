@@ -16,7 +16,6 @@ export const MovieCard = (props: MovieCradProps) => {
     try {
       await deleteDoc(docToRemove);
       props.getData();
-      alert('Movie successfully removed!');
     } catch (error) {
       console.log(error);
     }
