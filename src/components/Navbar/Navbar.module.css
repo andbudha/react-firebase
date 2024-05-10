@@ -24,18 +24,33 @@
   align-items: center;
 }
 
-.logout_btn_box {
+.btn_box {
   height: 40px;
-  width: 100px;
+  width: 220px;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.my_movies_btn {
+  height: 30px;
+  width: 100px;
+  font-size: 1.1rem;
+  background: #f3f3f3;
+  color: #151515;
+  border: 1px solid #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .logout_btn {
   height: 30px;
-  width: 90px;
+  width: 100px;
+  background: #f3f3f3;
   font-size: 1rem;
   border: 1px solid #fff;
   cursor: pointer;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './Navbar.module.css';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase';
-import { Navigate } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 export default function Navbar() {
   const [loggedOut, setLoggedOut] = useState<boolean>(false);
@@ -27,9 +27,12 @@ export default function Navbar() {
       <div className={styles.logo_box}>
         <h2 className={styles.logo}>Firebase</h2>
       </div>
-      <div className={styles.logout_btn_box}>
+      <div className={styles.btn_box}>
+        <NavLink className={styles.my_movies_btn} to={'mymovies'}>
+          <h4>My Movies</h4>
+        </NavLink>
         <button className={styles.logout_btn} onClick={logOut}>
-          Log Out
+          <h3>Log Out</h3>
         </button>
       </div>
     </div>
