@@ -3,7 +3,6 @@ import { auth, dataBase } from '../../config/firebase';
 import { useEffect, useState } from 'react';
 import { Movie, Movies } from '../../assets/types';
 import { collection, getDocs } from 'firebase/firestore';
-import Navbar from '../Navbar/Navbar';
 import { GridCard } from '../GridCard/GridCard';
 import { MovieForm } from '../MovieForm/MovieForm';
 import { UpdateMovieForm } from '../UpdateMovieForm/UpdateMovieForm';
@@ -42,7 +41,6 @@ export const Home = () => {
 
   return (
     <div className={styles.main_home_page}>
-      <Navbar />
       {isLoading ? <ProgressBar /> : <FakeProgressBar />}
       {!!activeUpdateMovieForm && (
         <UpdateMovieForm
