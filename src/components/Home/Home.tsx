@@ -9,7 +9,6 @@ import FakeProgressBar from '../ProgressBar/FakeProgressBar';
 type HomeProps = {
   movies: Movies | null;
   isLoading: boolean;
-  loggedInUserID: undefined | string;
   activeUpdateMovieForm: boolean;
   getData: () => void;
   setIsLoading: (newLoadingStatus: boolean) => void;
@@ -20,7 +19,6 @@ type HomeProps = {
 export const Home = ({
   movies,
   isLoading,
-  loggedInUserID,
   getData,
   setIsLoading,
   activeUpdateMovieForm,
@@ -39,15 +37,10 @@ export const Home = ({
           getData={getData}
         />
       )}
-      <MovieForm
-        getData={getData}
-        setIsLoading={setIsLoading}
-        loggedInUserID={loggedInUserID}
-      />
+      <MovieForm getData={getData} setIsLoading={setIsLoading} />
       <GridCard
         movies={movies}
         getData={getData}
-        loggedInUserID={loggedInUserID}
         setActiveUpdateMovieForm={setActiveUpdateMovieForm}
         setMovieToUpdate={setMovieToUpdate}
       />

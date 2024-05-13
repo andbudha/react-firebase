@@ -12,13 +12,11 @@ import { auth, dataBase } from './config/firebase';
 import { LoginContext } from './contexts/auth_context';
 
 function App() {
-  const { loggedInUserID, setLoggedInUserID } = useContext(LoginContext);
   const [movies, setMovies] = useState<null | Movies>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
   const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
-
-  console.log(loggedInUserID);
+  const { setLoggedInUserID } = useContext(LoginContext);
 
   const movieCollection = collection(dataBase, 'movies');
   const getData = async () => {
@@ -51,7 +49,6 @@ function App() {
               <Home
                 movies={movies}
                 isLoading={isLoading}
-                loggedInUserID={loggedInUserID}
                 getData={getData}
                 setIsLoading={setIsLoading}
                 activeUpdateMovieForm={activeUpdateMovieForm}
@@ -66,7 +63,6 @@ function App() {
             element={
               <MyMovies
                 movies={movies}
-                loggedInUserID={loggedInUserID}
                 getData={getData}
                 setActiveUpdateMovieForm={setActiveUpdateMovieForm}
                 setMovieToUpdate={setMovieToUpdate}

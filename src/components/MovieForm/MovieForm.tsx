@@ -1,24 +1,22 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import styles from './Movieform.module.css';
 import { addDoc, collection } from 'firebase/firestore';
 import { dataBase } from '../../config/firebase';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
+import { LoginContext } from '../../contexts/auth_context';
 
 type MovieFormProps = {
   getData: () => void;
   setIsLoading: (newLoadingStatus: boolean) => void;
-  loggedInUserID: undefined | string;
 };
-export const MovieForm = ({
-  getData,
-  setIsLoading,
-  loggedInUserID,
-}: MovieFormProps) => {
+export const MovieForm = ({ getData, setIsLoading }: MovieFormProps) => {
   const [inputTitle, setInputTitle] = useState<string>('');
   const [inputReleaseYear, setInputReleaseYear] = useState<string>('');
   const [answer, setAnswer] = useState<boolean>(false);
   const [toggleMovieBtn, setToggleMovieBtn] = useState<boolean>(false);
   const movieCollection = collection(dataBase, 'movies');
+
+  const { loggedInUserID } = useContext(LoginContext);
 
   const toggleMovieBtnHandler = () => {
     setToggleMovieBtn(!toggleMovieBtn);

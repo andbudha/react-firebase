@@ -12,9 +12,7 @@ export const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassowrd] = useState<string>('');
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  // const [loggedUser, setLoggedUser] = useState<string | undefined>(undefined);
 
-  // console.log(loggedUser);
   console.log(loggedInUserID);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +39,6 @@ export const Login = () => {
         alert('Successfully logged in!');
         setEmail('');
         setPassowrd('');
-        // setLoggedUser(auth.currentUser?.uid);
         setLoggedInUserID(auth.currentUser?.uid);
       }
     } catch (error) {

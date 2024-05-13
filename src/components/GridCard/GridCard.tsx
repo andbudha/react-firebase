@@ -4,32 +4,34 @@ import styles from './GridCard.module.css';
 type GridCardProps = {
   movies: Movie[] | null;
   getData: () => void;
-  loggedInUserID: string | undefined;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 export const GridCard = ({
   movies,
   getData,
-  loggedInUserID,
   setActiveUpdateMovieForm,
   setMovieToUpdate,
 }: GridCardProps) => {
+  const movieList = movies?.map((movie) => {
+    return (
+      <div key={movie.id}>
+        <MovieCard
+          movie={movie}
+          getData={getData}
+          setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+          setMovieToUpdate={setMovieToUpdate}
+        />
+      </div>
+    );
+  });
   return (
     <div className={styles.grid_card_main_box}>
-      {movies?.map((movie) => {
-        return (
-          <div key={movie.id}>
-            <MovieCard
-              movie={movie}
-              getData={getData}
-              loggedInUserID={loggedInUserID}
-              setActiveUpdateMovieForm={setActiveUpdateMovieForm}
-              setMovieToUpdate={setMovieToUpdate}
-            />
-          </div>
-        );
-      })}
+      {movies?.length ? (
+        movieList
+      ) : (
+        <h1 className={styles.notification_text}>No movies found!</h1>
+      )}
     </div>
   );
 };

@@ -2,16 +2,18 @@ import styles from './MovieCard.module.css';
 import { Movie } from '../../assets/types';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { dataBase } from '../../config/firebase';
+import { useContext } from 'react';
+import { LoginContext } from '../../contexts/auth_context';
 
 type MovieCradProps = {
   movie: Movie;
   getData: () => void;
-  loggedInUserID: string | undefined;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 
 export const MovieCard = (props: MovieCradProps) => {
+  const { loggedInUserID } = useContext(LoginContext);
   const deleteMovieHandler = async (movieID: string) => {
     const docToRemove = doc(dataBase, 'movies', movieID);
     try {
@@ -25,6 +27,7 @@ export const MovieCard = (props: MovieCradProps) => {
   const updateMovieHandler = (movieToUpdate: Movie) => {
     props.setActiveUpdateMovieForm(true);
     props.setMovieToUpdate(movieToUpdate);
+    console.log('ok', movieToUpdate.id);
   };
   return (
     <div className={styles.card_box}>
@@ -46,7 +49,7 @@ export const MovieCard = (props: MovieCradProps) => {
           </span>
         </h3>
       </div>
-      {props.loggedInUserID === props.movie.userID && (
+      {loggedInUserID === props.movie.userID && (
         <div className={styles.btn_box}>
           <button
             className={styles.remove_btn}
