@@ -3,16 +3,27 @@ import { Movie, Movies } from '../../assets/types';
 import { LoginContext } from '../../contexts/auth_context';
 import { MovieCard } from '../MovieCard/MovieCard';
 import styles from './MyMovies.module.css';
+import { UpdateMovieForm } from '../UpdateMovieForm/UpdateMovieForm';
+import FakeProgressBar from '../ProgressBar/FakeProgressBar';
+import { ProgressBar } from '../ProgressBar/ProgressBar';
 
 type MyMoviesProps = {
   movies: Movies | null;
   getData: () => void;
+  isLoading: boolean;
+  movieToUpdate: Movie | null;
+  activeUpdateMovieForm: boolean;
+  setIsLoading: (newLoadingStatus: boolean) => void;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 export const MyMovies = ({
   movies,
   getData,
+  movieToUpdate,
+  isLoading,
+  setIsLoading,
+  activeUpdateMovieForm,
   setActiveUpdateMovieForm,
   setMovieToUpdate,
 }: MyMoviesProps) => {
@@ -36,12 +47,23 @@ export const MyMovies = ({
   });
 
   return (
-    <div className={styles.my_movies_main_box}>
-      {filteredMovieList?.length ? (
-        filteredMovieList
-      ) : (
-        <h1 className={styles.notification_text}>No movies found!</h1>
-      )}
-    </div>
+    <>
+      {isLoading ? <ProgressBar /> : <FakeProgressBar />}
+      <div className={styles.my_movies_main_box}>
+        {!!activeUpdateMovieForm && (
+          <UpdateMovieForm
+            setActiveUpdateMovieForm={setActiveUpdateMovieForm}
+            movieToUpdate={movieToUpdate}
+            setIsLoading={setIsLoading}
+            getData={getData}
+          />
+        )}
+        {filteredMovieList?.length ? (
+          filteredMovieList
+        ) : (
+          <h1 className={styles.notification_text}>No movies found!</h1>
+        )}
+      </div>
+    </>
   );
 };

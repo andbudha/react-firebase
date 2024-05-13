@@ -17,8 +17,10 @@ function App() {
   const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
   const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
   const { setLoggedInUserID } = useContext(LoginContext);
-
   const movieCollection = collection(dataBase, 'movies');
+
+  console.log(activeUpdateMovieForm);
+
   const getData = async () => {
     setIsLoading(true);
     try {
@@ -64,8 +66,12 @@ function App() {
               <MyMovies
                 movies={movies}
                 getData={getData}
+                isLoading={isLoading}
+                activeUpdateMovieForm={activeUpdateMovieForm}
                 setActiveUpdateMovieForm={setActiveUpdateMovieForm}
                 setMovieToUpdate={setMovieToUpdate}
+                setIsLoading={setIsLoading}
+                movieToUpdate={movieToUpdate}
               />
             }
           />
