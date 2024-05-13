@@ -4,6 +4,7 @@ import { deleteDoc, doc } from 'firebase/firestore';
 import { dataBase } from '../../config/firebase';
 import { useContext } from 'react';
 import { LoginContext } from '../../contexts/auth_context';
+import { useLocation } from 'react-router-dom';
 
 type MovieCradProps = {
   movie: Movie;
@@ -49,22 +50,23 @@ export const MovieCard = (props: MovieCradProps) => {
           </span>
         </h3>
       </div>
-      {loggedInUserID === props.movie.userID && (
-        <div className={styles.btn_box}>
-          <button
-            className={styles.remove_btn}
-            onClick={() => deleteMovieHandler(props.movie.id)}
-          >
-            delete
-          </button>
-          <button
-            className={styles.update_movie_btn}
-            onClick={() => updateMovieHandler(props.movie)}
-          >
-            update
-          </button>
-        </div>
-      )}
+      {useLocation().pathname === '/mymovies' &&
+        loggedInUserID === props.movie.userID && (
+          <div className={styles.btn_box}>
+            <button
+              className={styles.remove_btn}
+              onClick={() => deleteMovieHandler(props.movie.id)}
+            >
+              delete
+            </button>
+            <button
+              className={styles.update_movie_btn}
+              onClick={() => updateMovieHandler(props.movie)}
+            >
+              update
+            </button>
+          </div>
+        )}
     </div>
   );
 };
