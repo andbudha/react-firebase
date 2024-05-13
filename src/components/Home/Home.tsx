@@ -1,7 +1,6 @@
 import styles from './Home.module.css';
 import { Movie, Movies } from '../../assets/types';
 import { GridCard } from '../GridCard/GridCard';
-import { MovieForm } from '../MovieForm/MovieForm';
 import { UpdateMovieForm } from '../UpdateMovieForm/UpdateMovieForm';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import FakeProgressBar from '../ProgressBar/FakeProgressBar';
@@ -37,7 +36,6 @@ export const Home = ({
           getData={getData}
         />
       )}
-      <MovieForm getData={getData} setIsLoading={setIsLoading} />
       <GridCard
         movies={movies}
         getData={getData}

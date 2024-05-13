@@ -6,6 +6,7 @@ import styles from './MyMovies.module.css';
 import { UpdateMovieForm } from '../UpdateMovieForm/UpdateMovieForm';
 import FakeProgressBar from '../ProgressBar/FakeProgressBar';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
+import { MovieForm } from '../MovieForm/MovieForm';
 
 type MyMoviesProps = {
   movies: Movies | null;
@@ -49,6 +50,7 @@ export const MyMovies = ({
   return (
     <>
       {isLoading ? <ProgressBar /> : <FakeProgressBar />}
+      <MovieForm getData={getData} setIsLoading={setIsLoading} />
       <div className={styles.my_movies_main_box}>
         {!!activeUpdateMovieForm && (
           <UpdateMovieForm
@@ -58,6 +60,7 @@ export const MyMovies = ({
             getData={getData}
           />
         )}
+
         {filteredMovieList?.length ? (
           filteredMovieList
         ) : (
