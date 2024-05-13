@@ -4,12 +4,14 @@ import styles from './GridCard.module.css';
 type GridCardProps = {
   movies: Movie[] | null;
   getData: () => void;
+  loggedInUserID: string | undefined;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 export const GridCard = ({
   movies,
   getData,
+  loggedInUserID,
   setActiveUpdateMovieForm,
   setMovieToUpdate,
 }: GridCardProps) => {
@@ -21,6 +23,7 @@ export const GridCard = ({
             <MovieCard
               movie={movie}
               getData={getData}
+              loggedInUserID={loggedInUserID}
               setActiveUpdateMovieForm={setActiveUpdateMovieForm}
               setMovieToUpdate={setMovieToUpdate}
             />

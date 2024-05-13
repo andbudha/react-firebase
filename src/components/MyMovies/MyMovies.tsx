@@ -4,20 +4,20 @@ import styles from './MyMovies.module.css';
 
 type MyMoviesProps = {
   movies: Movies | null;
-  currentUserID: undefined | string;
+  loggedInUserID: undefined | string;
   getData: () => void;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
 export const MyMovies = ({
   movies,
-  currentUserID,
+  loggedInUserID,
   getData,
   setActiveUpdateMovieForm,
   setMovieToUpdate,
 }: MyMoviesProps) => {
   const filteredMovies = movies?.filter(
-    (movie) => movie.userID === currentUserID
+    (movie) => movie.userID === loggedInUserID
   );
   console.log(filteredMovies);
 
@@ -29,6 +29,7 @@ export const MyMovies = ({
             <MovieCard
               movie={movie}
               getData={getData}
+              loggedInUserID={loggedInUserID}
               setActiveUpdateMovieForm={setActiveUpdateMovieForm}
               setMovieToUpdate={setMovieToUpdate}
             />

@@ -7,15 +7,13 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 type MovieFormProps = {
   getData: () => void;
   setIsLoading: (newLoadingStatus: boolean) => void;
-  currentUserID: undefined | string;
+  loggedInUserID: undefined | string;
 };
 export const MovieForm = ({
   getData,
   setIsLoading,
-  currentUserID,
+  loggedInUserID,
 }: MovieFormProps) => {
-  console.log(currentUserID);
-
   const [inputTitle, setInputTitle] = useState<string>('');
   const [inputReleaseYear, setInputReleaseYear] = useState<string>('');
   const [answer, setAnswer] = useState<boolean>(false);
@@ -26,7 +24,7 @@ export const MovieForm = ({
     setToggleMovieBtn(!toggleMovieBtn);
   };
   const newMovie = {
-    userID: currentUserID,
+    userID: loggedInUserID,
     oscar: answer,
     releaseYear: Number(inputReleaseYear),
     title: inputTitle,

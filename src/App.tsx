@@ -6,18 +6,19 @@ import { Login } from './components/Login/Login';
 import { MyMovies } from './components/MyMovies/MyMovies';
 import { Layout } from './components/Layout/Layout';
 import { Movie, Movies } from './assets/types';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { auth, dataBase } from './config/firebase';
+import { LoginContext } from './contexts/auth_context';
 
 function App() {
+  const { loggedInUserID, setLoggedInUserID } = useContext(LoginContext);
   const [movies, setMovies] = useState<null | Movies>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeUpdateMovieForm, setActiveUpdateMovieForm] = useState(false);
   const [movieToUpdate, setMovieToUpdate] = useState<null | Movie>(null);
-  const [currentUserID, setCurrentUserID] = useState<undefined | string>(
-    undefined
-  );
+
+  console.log(loggedInUserID);
 
   const movieCollection = collection(dataBase, 'movies');
   const getData = async () => {
@@ -33,7 +34,7 @@ function App() {
       console.log(error);
     } finally {
       setIsLoading(false);
-      setCurrentUserID(auth.currentUser?.uid);
+      setLoggedInUserID(auth.currentUser?.uid);
     }
   };
   useEffect(() => {
@@ -50,7 +51,7 @@ function App() {
               <Home
                 movies={movies}
                 isLoading={isLoading}
-                currentUserID={currentUserID}
+                loggedInUserID={loggedInUserID}
                 getData={getData}
                 setIsLoading={setIsLoading}
                 activeUpdateMovieForm={activeUpdateMovieForm}
@@ -65,7 +66,7 @@ function App() {
             element={
               <MyMovies
                 movies={movies}
-                currentUserID={currentUserID}
+                loggedInUserID={loggedInUserID}
                 getData={getData}
                 setActiveUpdateMovieForm={setActiveUpdateMovieForm}
                 setMovieToUpdate={setMovieToUpdate}

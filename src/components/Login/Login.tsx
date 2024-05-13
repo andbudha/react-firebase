@@ -1,15 +1,21 @@
 import styles from './Login.module.css';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { NavLink, Navigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { generateErrorMessage } from '../../auth/ErrorHandler/errorhandler';
 import { FirebaseError } from 'firebase/app';
+import { LoginContext } from '../../contexts/auth_context';
 
 export const Login = () => {
+  const { loggedInUserID, setLoggedInUserID } = useContext(LoginContext);
   const [email, setEmail] = useState<string>('');
   const [password, setPassowrd] = useState<string>('');
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  // const [loggedUser, setLoggedUser] = useState<string | undefined>(undefined);
+
+  // console.log(loggedUser);
+  console.log(loggedInUserID);
 
   const emailSettingFunc = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -35,6 +41,8 @@ export const Login = () => {
         alert('Successfully logged in!');
         setEmail('');
         setPassowrd('');
+        // setLoggedUser(auth.currentUser?.uid);
+        setLoggedInUserID(auth.currentUser?.uid);
       }
     } catch (error) {
       if (error instanceof FirebaseError) {
@@ -42,6 +50,7 @@ export const Login = () => {
       } else {
         console.log(error);
       }
+    } finally {
     }
   };
 

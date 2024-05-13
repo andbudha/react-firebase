@@ -6,6 +6,7 @@ import { dataBase } from '../../config/firebase';
 type MovieCradProps = {
   movie: Movie;
   getData: () => void;
+  loggedInUserID: string | undefined;
   setActiveUpdateMovieForm: (newState: boolean) => void;
   setMovieToUpdate: (movieToUpdate: Movie) => void;
 };
@@ -45,20 +46,22 @@ export const MovieCard = (props: MovieCradProps) => {
           </span>
         </h3>
       </div>
-      <div className={styles.btn_box}>
-        <button
-          className={styles.remove_btn}
-          onClick={() => deleteMovieHandler(props.movie.id)}
-        >
-          delete
-        </button>
-        <button
-          className={styles.update_movie_btn}
-          onClick={() => updateMovieHandler(props.movie)}
-        >
-          update
-        </button>
-      </div>
+      {props.loggedInUserID === props.movie.userID && (
+        <div className={styles.btn_box}>
+          <button
+            className={styles.remove_btn}
+            onClick={() => deleteMovieHandler(props.movie.id)}
+          >
+            delete
+          </button>
+          <button
+            className={styles.update_movie_btn}
+            onClick={() => updateMovieHandler(props.movie)}
+          >
+            update
+          </button>
+        </div>
+      )}
     </div>
   );
 };
